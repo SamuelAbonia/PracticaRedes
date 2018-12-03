@@ -14,6 +14,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.TargetDataLine;
 
+
+
+/*
+*this class is used to establish conection to the server that has the
+*song that will be played 
+*
+*/
 public class AudioUDPClient {
 
 	AudioInputStream audioInputStream;
@@ -26,7 +33,10 @@ public class AudioUDPClient {
 		initiateAudio();
 	}
 	
-	
+	/*
+	*This method create a AudioFormat Object to be used in
+	* AudioUDPClient
+	*/
 	private AudioFormat getAudioFormat() {
 		float sampleRate = 16000F;
 		int sampleSizeInBits = 16;
@@ -36,6 +46,11 @@ public class AudioUDPClient {
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
 	}
 
+		/*
+		*this method play the audio 
+		*
+		*/
+	
 	private void playAudio() {
 		byte[] buffer = new byte[10000];
 		try {
@@ -49,7 +64,12 @@ public class AudioUDPClient {
 			// Handle exceptions
 		}
 	}
-
+	
+	/*
+	*this method receive the audio through UDP by port 9786
+	*and the adress 230.0.0.1
+	*
+	*/
 	private void initiateAudio() {
 		try {
 			MulticastSocket socket = new MulticastSocket(9786);
@@ -85,6 +105,9 @@ public class AudioUDPClient {
 		}
 	}
 
+	/*
+	*  this method create a AudioUDPClient
+	*/
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
