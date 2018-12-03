@@ -15,7 +15,9 @@ public class WebServer extends Thread {
 	
 	
 	
-	
+	/*
+	*this method create a webServer and manage the HTTP requests that are made through the web page
+	*/
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -37,9 +39,6 @@ public class WebServer extends Thread {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		new WebServer();
-//	}
+
 
 }
