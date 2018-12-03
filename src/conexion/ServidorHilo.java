@@ -11,6 +11,11 @@ import java.net.Socket;
 
 import modelo.Caballo;
 
+
+/*
+*this class manages the logic of the betting business
+*/
+
 public class ServidorHilo extends Thread{
 
 	
@@ -28,6 +33,12 @@ public class ServidorHilo extends Thread{
 		
 	}
 	
+	
+	/*
+	*this method receive the bet of a client and modify the status of a horse and reply to the client
+	*that the client's bets was accepted
+	*/
+	
 	@Override
 	public void run() {
 		
@@ -44,10 +55,7 @@ public class ServidorHilo extends Thread{
 				System.out.println(termino);
 				String[] linea = linea2.split(" ");
 				
-//				int[] apuesta = new int[2];
-//				
-//				apuesta[0]= Integer.parseInt(linea[0]);
-//				apuesta[1]= Integer.parseInt(linea[1]);
+
 				
 				if(linea[0].equals(caballos[0].getNombre()))
 					caballos[0].setApuesta(caballos[0].getApuesta()+Integer.parseInt(linea[1]));
@@ -69,7 +77,7 @@ public class ServidorHilo extends Thread{
 			writerS.println("termino");
 			readerS.close();
 			writerS.close();
-//			cliente.close();
+
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -78,6 +86,9 @@ public class ServidorHilo extends Thread{
 		
 	}
 
+	/*
+	*this method change the status of the betting server
+	*/
 	public void setTermino(boolean b) {
 		// TODO Auto-generated method stub
 		termino=b;
