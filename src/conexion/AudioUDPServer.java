@@ -10,17 +10,30 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine;
 
+
+/*
+*this class it allows sending an audio through UDP  
+*
+*
+*/
 public class AudioUDPServer {
 
 	private final byte audioBuffer[] = new byte[10000];
 	private TargetDataLine targetDataLine;
 
+	/*
+	*this method create a AudioUDPServer 
+	*/
 	public AudioUDPServer() {
 		// TODO Auto-generated constructor stub
 
 		setupAudio();
 		broadcastAudio();
 	}
+	
+	/*
+	*this method return a AudioFormat 
+	*/
 
 	private AudioFormat getAudioFormat() {
 		float sampleRate = 16000F;
@@ -31,6 +44,10 @@ public class AudioUDPServer {
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
 	}
 
+	/*
+	*This method establish contection with AudioUDPCLient to play the song
+	*through adress 230.0.0.0 creating a group adress 
+	*/
 	private void broadcastAudio() {
 		try {
 			MulticastSocket socket = new MulticastSocket();
@@ -52,7 +69,9 @@ public class AudioUDPServer {
 	}
 
 	
-	
+	/*
+	*this method is in charge of set up the audio 
+	*/
 	private void setupAudio() {
 		try {
 			AudioFormat audioFormat = getAudioFormat();
@@ -66,6 +85,7 @@ public class AudioUDPServer {
 		}
 	}
 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
