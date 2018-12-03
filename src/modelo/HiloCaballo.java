@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class HiloCaballo extends Thread{
 
 	private Caballo caballo;
@@ -14,6 +15,9 @@ public class HiloCaballo extends Thread{
 		
 	}
 	
+	/*
+	*this method is in charge of change the position of a horse, generating a random number
+	*/
 	@Override
 	public void run() {
 		super.run();
