@@ -21,6 +21,9 @@ public class ClientHandler implements Runnable{
 		System.out.println("ClientHanlder Terminated for "+  this.socket + "\n");
 	}
 	
+	/*
+	*this method handle a request make it in the web page 
+	*/
 	public void handleRequest(Socket socket)
 	{
 		try {
@@ -50,27 +53,7 @@ public class ClientHandler implements Runnable{
 					sendResponse(socket, 200, responseBuffer.toString());
 				}
 				
-//				else if(!httpQueryString.equals("/favicon.ico")&&!httpQueryString.equals("/?")) {
-//					
-//					String p=httpQueryString.replaceAll("/", "");
-//					cedula=p;
-//					responseBuffer =  sendHTML(p);
-//					sendResponse(socket, 200, responseBuffer.toString());				
-//				}
-				
-				
-				
-				
-//				StringBuilder responseBuffer =  new StringBuilder();
-//				responseBuffer
-//				.append("<html>")
-//				.append("<body bgcolor='black'>")
-//				.append("<font color='white'>[0][1][0]</font><br>")
-//				.append("<font color='white'>[0][0][1]</font><br>")
-//				.append("<font color='white'>[1][1][1]</font><br>")
-//				.append("<img src='https://s2.glbimg.com/QJD0YP7szRqJuSEUdGHPF_2Dwqs=/850x446/s.glbimg.com/po/tt/f/original/2012/06/01/pirata-e1314380534977.jpg'>")
-//				.append("</body>")
-//				.append("</html>");
+
 			}
 			
 			else if(httpMethod.equals("POST"))
@@ -101,12 +84,15 @@ public class ClientHandler implements Runnable{
 		}		
 	}
 	
+	/*
+	*this method send a response to the web page
+	*/
 	public void sendResponse(Socket socket, int statusCode, String responseString)
 	{
 		String statusLine;
 		String serverHeader = "Server: WebServer\r\n";
 		String contentTypeHeader = "Content-Type: text/html\r\n";
-		System.out.println("¨************"+responseString);
+		System.out.println("Â¨************"+responseString);
 		try {
 			DataOutputStream out =  new DataOutputStream(socket.getOutputStream());
 			if (statusCode == 200) 
@@ -141,7 +127,9 @@ public class ClientHandler implements Runnable{
 		
 	}
 	
-	
+	/*
+	*this method rea HTML file and create a page in a browser
+	*/
 	public  StringBuilder leerHTML(String ruta) {
 		
 		StringBuilder response = new StringBuilder();
@@ -162,6 +150,9 @@ public class ClientHandler implements Runnable{
 		
 	}
 	
+	/*
+	*this method allows to generate a HTML file in a browser with java
+	*/
 	public StringBuilder sendHTML(String cedula) {
 		
 		StringBuilder p= new StringBuilder();
