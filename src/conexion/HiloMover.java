@@ -10,6 +10,9 @@ public class HiloMover extends Thread {
 	private Cliente cliente;
 	
 	
+	/*
+	*this method create a thread that receive the position of the horses during the race
+	*/
 	public HiloMover(MulticastSocket escucha, Cliente cliente, String[] caballo) {
 		// TODO Auto-generated constructor stub
 		this.escucha=escucha;
@@ -18,7 +21,10 @@ public class HiloMover extends Thread {
 		
 	}
 	
-	
+	/*
+	*this method receive the data that is sending by the server whit the new position of the horses
+	*and change the array of horse's position 
+	*/
 	@Override
 	public void run() {
 		
