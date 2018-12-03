@@ -9,7 +9,9 @@ public class Caballo {
 	private int apuesta;
 	
 	
-
+	/*
+	*this method create a horse with a name and an position 
+	*/
 	public Caballo(String nombre, int y) {
 
 		this.nombre=nombre;
@@ -19,6 +21,9 @@ public class Caballo {
 	
 	}
 	
+	/*
+	*this method get the amount of horse's bet
+	*/
 	public int getApuesta() {
 		return apuesta;
 	}
