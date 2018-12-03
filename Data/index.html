@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form Login | Samuel</title>
+<style type="text/css">
+
+body {
+	
+margin: 0;
+  padding: 0;
+  background: url("https://i.pinimg.com/originals/c1/ac/77/c1ac77db945662d32ed3b95d3c0832ec.jpg")no-repeat center top;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+
+.login-box{
+	  width: 320px;
+  height: 420px;
+  background: #000;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+}
+
+.login-box .avatar{
+
+ width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+	
+}
+
+.login-box h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.login-box input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-box input[type="text"], .login-box input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-box input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #b80f22;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+
+</style>
+<script language="JavaScript" type="text/javascript">
+	
+	function login(){
+	validarTexto();
+	
+	}
+
+	function validarTexto(){
+	var text= document.getElementsByClassName("input")[0].value;
+	return text;
+	alert(text)
+	}
+
+	function verificarUsuario(){
+	var arrayData= new Array();
+	var archivoTxt= new XMLHttpRequest();
+	var fileRuta= 'basededatos.txt';
+	archivoTxt.open("GET",fileRuta,false);
+	archivoTxt.send(null);
+	var txt = archivoTxt.responseText;
+	var cedula = validarTexto();
+	var count=0;
+	var x= false;
+	var p ="";
+	
+	
+		for (var i=0;  txt[i]!="-" &&!x ; i++){
+
+			
+
+			for(var j=i*7; j<(i*7)+7;j++){
+				p=p.concat(txt[j]);
+			}
+
+			
+			
+			if(p==cedula){
+				x=true;
+			}
+		
+			p="";
+			
+		}
+	if(x){
+		alert(x);
+		seRegistro(cedula);
+	}
+	
+	}
+
+	function seRegistro(var cedula){
+	
+	var mostrar= new XMLHttpRequest();
+	mostrar.open("GET",cedula,false);
+	mostrar.send(null);
+	
+	}
+
+</script>
+
+
+</head>
+
+<body>
+<div class="login-box">
+
+	<img src="https://www.ecuestre.es/media/cache/big/upload/images/article/149041/article-Campeonato-Nacional-de-caballos-Frisones-2018-ntv-5b1f720c6d081.jpg" class="avatar" alt="Avatar Image">
+<h1>login here</h1>
+	<form action="http://localhost" method='POST' enctype="text/plain">
+		<label for="Cedula">Username</label>
+		<input name="id" type="text" placeholder="Enter Cedula" class="input">
+		
+		<input type="submit" value="Log in" class="butLog" onclick="seRegistro();">
+		
+		
+		<a href="#">
+	    ¿No tienes cuenta?
+		</a>
+	</form>
+	
+</div>
+	
+</body>
+</html>
