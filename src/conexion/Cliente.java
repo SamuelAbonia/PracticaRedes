@@ -23,7 +23,10 @@ import musica.CancionUDPCliente;
 
 
 
-
+/*
+*this class represent a Client in the application
+*and the interfaz of the application
+*/
 public class Cliente extends JFrame{
 
 	public static final String TRUSTTORE_LOCATION = "C:/Windows/System32/keystore.jks";
@@ -44,7 +47,9 @@ public class Cliente extends JFrame{
 	static AudioInputStream audioInputStream;
 	static SourceDataLine sourceDataLine;
 	
-	
+	/*
+	*this method create a cliente
+	*/
 	public Cliente() {
 		
 		
@@ -66,7 +71,10 @@ public class Cliente extends JFrame{
 		
 	}
 	
-	
+	/*
+	*This method is in charge of set the position of the caballo Array 
+	*each position in the array represent the position of the horse
+	*/
 	public void setCaballos(String[] caballo) {
 		this.caballo=caballo;
 		
@@ -86,15 +94,21 @@ public class Cliente extends JFrame{
 		buf.write(cedula);
 		buf.close();
 	
-		
+		/*
+		*In this part we can use SSL but we have to create a KeyStore in our computer
+		*in that case we have to delete the socket with port 5555
+		*/
 //		System.setProperty("javax.net.ssl.trustStore", TRUSTTORE_LOCATION);
 //		SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
-//		
+//		Socket client =  sf.createSocket("localhost", 26000);
+		
+		
 		Socket client= new Socket("localhost", 5555);
+		
 		Cliente cliente= new Cliente();
 		cliente.setVisible(true);
 		
-//		Socket client =  sf.createSocket("localhost", 26000); 
+ 
 		BufferedReader readerC =  new BufferedReader(new InputStreamReader(client.getInputStream())); 
 		writerC =  new PrintWriter(client.getOutputStream(), true); 
 		
@@ -119,45 +133,16 @@ public class Cliente extends JFrame{
 		initiateAudio();
 		
 							
-//		
-//		byte [] dato = new byte [1024];
-//
-//		
-//		DatagramPacket dgp = new DatagramPacket(dato, dato.length);
-//		escucha.receive(dgp);
-//
-//		
-//		dato = dgp.getData();
-//		
-//		String p= new String(dato,"UTF-8");
-//		System.out.println(p);
-		
-		
-		
-		
-//		Scanner lector= new Scanner(System.in);
-//		
-//		System.out.println("Escriba el numero del caballo [espacio]  cantidad");
-//		
-//		String linea = lector.nextLine();
-//		writerC.println(linea);
-//		
-//		String termino= readerC.readLine();
-//		System.out.println(termino);
-//		while(!termino.equals("termino")) {
-//			
-//			
-//			linea = lector.nextLine(); 
-//			writerC.println(linea);
-//			termino= readerC.readLine();
-//			System.out.println(termino);
-//
-//			 
-//		}
-//		System.out.println(termino);
+
 		
 		
 	}
+	
+	/*
+	*this method create a file with the information of a cliente in a bet
+	*each time the client bets, the information of the amount of the bet, the name of the horse, 
+	*if it won or not and the date of the bet is saved
+	*/
 	public void escribirArchivo() {
 		try {
 		File filedData= new File("Datos/"+cedula+".txt");
@@ -170,13 +155,16 @@ public class Cliente extends JFrame{
 		if(!archivoExiste) {
 			base.newLine();
 		}
-		base.write("El monto de la apuesta fue: "+ apuestaC+" Aposto por: "+nombreC+" "+" ¿Caballo ganador?: "+ganador+" En la fecha:"+"Dia: "+dia+" Mes: "+mes+" Año: "+annio);
+		base.write("El monto de la apuesta fue: "+ apuestaC+" Aposto por: "+nombreC+" "+" Â¿Caballo ganador?: "+ganador+" En la fecha:"+"Dia: "+dia+" Mes: "+mes+" AÃ±o: "+annio);
 		base.close();
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 	
+	/*
+	*this method return the audioFormat 
+	*/
 	private static AudioFormat getAudioFormat() {
 		float sampleRate = 16000F;
 		int sampleSizeInBits = 16;
@@ -186,6 +174,9 @@ public class Cliente extends JFrame{
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
 	}
 
+	/*
+	*this method play the audio on the client's side
+	*/
 	private static void playAudio() {
 		byte[] buffer = new byte[10000];
 		try {
@@ -200,6 +191,10 @@ public class Cliente extends JFrame{
 		}
 	}
 
+	/*
+	*this method allows the client to get the audio throug UDP conection 
+	*initializing the transfer of the narration
+	*/
 	private static void initiateAudio() {
 		try {
 			MulticastSocket socket = new MulticastSocket(9786);
@@ -235,7 +230,11 @@ public class Cliente extends JFrame{
 		}
 	}
 
-
+	
+	/*
+	*this method allows to a cliente make a bet 
+	*with parameter the name of the horse
+	*/
 	public void apostar(String caballo, int apuesta) {
 		nombreC=caballo;
 		apuestaC=apuesta;
@@ -244,10 +243,12 @@ public class Cliente extends JFrame{
 		
 	}
 	
-	
+	/*
+	*This method shows the change of the position of the horses during the race 
+	*/
 	public void mostrar() {
 		
-//		System.out.println(caballo[0]+" "+caballo[1]+" "+caballo[2]+" "+caballo[3]+" "+caballo[4]+" "+caballo[5]+"");
+
 		int[] posicion=new int[] {0,0,0,0,0,0};
 		panelCarrera.ponerPosicion(posicion);
 		panelCarrera.repaint();
@@ -261,11 +262,11 @@ public class Cliente extends JFrame{
 		posicion[5]=Integer.parseInt(caballo[5]);
 		
 		
-//		for (int i = 0; i < caballo.length; i++) {
-//			posicion[i]=Integer.parseInt(caballo[i]);
-//		}
 	}
-	
+	/*
+	*this class is a thread that play the audio of the narration
+	*of the race
+	*/
 	public static class HiloVoz extends Thread{
 
 
@@ -281,7 +282,11 @@ public class Cliente extends JFrame{
 
 		}
 	}
-
+	
+	/*
+	*this method shows the horse that won the race
+	*receive as a parameter the name of the horse that won
+	*/
 	public void mostrarGanador(String[] h) {
 		if(nombreC.equals(h)) {
 			ganador="Si";
