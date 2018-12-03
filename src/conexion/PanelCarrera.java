@@ -29,20 +29,6 @@ import javax.swing.JPanel;
 			// TODO Auto-generated method stub
 			super.paintComponent(g);
 			
-//			Graphics2D p= (Graphics2D) g;
-//			p.setBackground(Color.BLACK);
-//			ImageIcon a= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(a.getImage(), posicion[0], 0, this);
-//			ImageIcon b= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(b.getImage(), posicion[1], 70, this);
-//			ImageIcon c= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(c.getImage(), posicion[2], 140, this);
-//			ImageIcon d= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(d.getImage(), posicion[3], 210, this);
-//			ImageIcon e= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(e.getImage(), posicion[4], 280, this);
-//			ImageIcon f= new ImageIcon("./Data/caballo_2.gif");
-//			p.drawImage(f.getImage(), posicion[5], 350, this);
 			
 			Graphics2D p= (Graphics2D) g;
 			p.setBackground(Color.BLACK);
