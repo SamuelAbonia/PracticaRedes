@@ -10,6 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/*
+*This is a panel in the client interface that allows you to place a bet
+*/
+
 public class PanelApuestas extends JPanel implements ActionListener{
 	
 	
@@ -42,16 +47,27 @@ public class PanelApuestas extends JPanel implements ActionListener{
 		
 	}
 
+	/*
+	*this method disable the button to make a bet 
+	*/
 	public void desabilidarCaballo() {
 		caballo.setEnabled(false);
 	}
+	
+	/*
+	*this method return the client's bet
+	*/
 	public int apuesta() {
 		return Integer.parseInt(txtApuesta.getText());
 	}
 	
+	/*
+	*this method return the client's horse
+	*/
 	public String caballo() {
 		return (String) caballo.getSelectedItem();
 	}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
