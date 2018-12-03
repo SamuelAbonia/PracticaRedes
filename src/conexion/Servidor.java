@@ -22,6 +22,9 @@ import modelo.HiloCaballo;
 import musica.CancionUDPServer;
 
 
+/*
+*this class represents the server of the application
+*/
 
 public class Servidor {
 
@@ -38,14 +41,24 @@ public class Servidor {
 
 	
 	
-	
+	/*
+	*this method is responsible for initializing the server,
+	*creating the horses and giving them initial positions.
+	*Bets are initialized according to the time it has been decided that the server will be running 
+	*to receive bets, after this time the server closes the bet and begins the transmission of the race and the narration
+	*/
 
 	public static void main(String[] args) throws IOException {
+		
+		/*
+		*if you want to use ssl you have to enable the following
+		*four lines and disable the soket that has port 5555
+		*/
 		
 //		System.setProperty("javax.net.ssl.keyStore", KEYSTORE_LOCATION);
 //		System.setProperty("javax.net.ssl.keyStorePassword", KEYSTORE_PASSWORD);
 //		SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-//		
+//		ServerSocket server= ssf.createServerSocket(26000);
 
 		clientes= new ArrayList<ServidorHilo>();
 		listGanador= new ArrayList<>();
@@ -62,7 +75,7 @@ public class Servidor {
 		Caballo caballo6= new Caballo("Tornado",20);
 
 		caballos = new Caballo[] {caballo1,caballo2,caballo3,caballo4,caballo5,caballo6};
-//		ServerSocket server= ssf.createServerSocket(26000);
+
 		ServerSocket server= new ServerSocket(5555);
 		
 		long tiempoInicial =  System.currentTimeMillis();
@@ -150,16 +163,13 @@ public class Servidor {
 
 		DatagramPacket posiso= new DatagramPacket(dato, dato.length, group,40000);
 		socket.send(posiso);
-
-
-
-
-
-
-
 	}
 
 
+	/*
+	*This method return the Audioformat of the narration
+	*/
+	
 	private static AudioFormat getAudioFormat() {
 		float sampleRate = 16000F;
 		int sampleSizeInBits = 16;
@@ -168,7 +178,10 @@ public class Servidor {
 		boolean bigEndian = false;
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
 	}
-
+	
+	/*
+	*this method allows the transmission of the audio through the adress 230.0.0.0  creating a adress group
+	*/
 	private static void broadcastAudio() {
 		try {
 			MulticastSocket socket = new MulticastSocket();
@@ -190,7 +203,9 @@ public class Servidor {
 	}
 
 
-
+	/*
+	*this method set up the audio
+	*/
 	private static void setupAudio() {
 		try {
 			AudioFormat audioFormat = getAudioFormat();
@@ -204,17 +219,9 @@ public class Servidor {
 		}
 	}
 
-
-
-	//	static class Timmer extends Thread{
-	//		
-	//		static int segundos
-	//		
-	//		
-	//		
-	//	}
-
-
+	/*
+	*this class allows the transmission of the narraiton through of a thread 
+	*/
 	public static class HiloVoz extends Thread{
 
 
@@ -231,50 +238,7 @@ public class Servidor {
 
 		}
 	}
-
-	public static class HiloTiempo extends Thread{
-		
-		boolean tiempo=true;
-		
-		
-		public HiloTiempo() {
-
-		}
-		
-		public boolean getTiempo() {
-			return tiempo;
-		}
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			super.run();
-
-			int segundos=10;
-
-			while(segundos>0) {
-				try {
-					sleep(1000);
-					segundos=segundos-1;
-					if(segundos==0) {
-						throw new Exception();
-					}
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					
-				}
-			}
-			tiempo=false;
-
-		}
-	}
 	
-	
-	public void seguir() {
-		
-
-	}
 
 }
 
